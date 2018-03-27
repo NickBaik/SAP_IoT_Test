@@ -13,8 +13,8 @@ client.connect()
 
 while True:
     try:
-	msg = random.randrange(0,100)
-	str(msg)
+	input_random1=random.randint(0,100)
+	msg = str(input_random1)
 	client.publish(TOPIC, msg)
 	print(msg)
     except OSError:
