@@ -30,10 +30,10 @@ print('allset')
 while True:
     try:
         while 1:
-            print('wait msg1')
+            #print('wait msg1')
             client.subscribe(b"motorDevice1")
             client.wait_msg()
-            print('wait msg2')
+            #print('wait msg2')
     except OSError:
         print('Failed to read sensor.')
         sleep(4)
