@@ -15,11 +15,13 @@ def sub_cb(topic, msg):
         p17 = machine.Pin(17)
         pwm17 = machine.PWM(p17)
         pwm17.duty(1022)
+        pwm14.duty(1022)
     elif(str(msg) == 'b\'OFF\''):
         print('Motor off')
         p17 = machine.Pin(17)
         pwm17 = machine.PWM(p17)
         pwm17.duty(500)
+        pwm14.duty(0)
     
     
     
@@ -41,6 +43,12 @@ def motorSetup():
     pwm17.duty(500)
     pwm16.duty(500)
     
+def buzzerSetup():
+    p14 = machine.Pin(14)
+    pwm14 = machine.PWM(p14)
+    pwm14.freq(500)
+    pwm14.duty(0)
+    
     
 
 print('start')
@@ -59,12 +67,13 @@ print('test')
 client.connect()
 client.set_callback(sub_cb)
 motorSetup()
+buzzerSetup()
 print('allset')
 
 #blink 3times
 blink()
 blink()
-blink()
+
 #
 
 
@@ -77,4 +86,4 @@ while True:
             #print('wait msg2')
     except OSError:
         print('Failed to read sensor.')
-        sleep(4)
+        sleep(3)

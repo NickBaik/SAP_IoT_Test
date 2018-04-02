@@ -15,6 +15,13 @@ delayTime=2.8
 delayTime2=0.04
 offTime=0.9680
 
+def blink():
+    led14 = machine.Pin(14, machine.Pin.OUT)
+    led14.value(1)
+    sleep(0.5)
+    led14.value(0)
+    sleep(0.5)
+
 station = network.WLAN(network.STA_IF)
 station.active(True)
 station.connect("Baek","82388238")

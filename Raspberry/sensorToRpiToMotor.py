@@ -39,7 +39,7 @@ factor = 0
 port="/dev/ttyUSB0"
 timeIntervall = 5
 d1temp = 0 #device1 temperature
-d1dust = 0#device1 dustdensity
+d1dist = 0#device1 dustdensity
 d1humi = 0
 #'''
 
@@ -51,13 +51,13 @@ def on_connect(client, userdata, flag, rc):
          
 def on_message(client, userdata, msg):
          global d1temp
-         global d1dust
+         global d1dist
          global d1humi
          
          print("[esp] " + msg.topic+" "+str(msg.payload))
          device_1_msg = str(msg.payload)
          d1temp = int(device_1_msg.split(' ')[3])
-         d1dust = float(device_1_msg.split(' ')[9])
+         d1dist = int(device_1_msg.split(' ')[9])
          d1humi = int(device_1_msg.split(' ')[6])
          
 def pubToMotor() :
@@ -90,7 +90,7 @@ print ('Posting to:', postAddress)
 class IoT4_0(threading.Thread):
          def run(self):
                   global d1temp
-                  global d1dust
+                  global d1dist
                   global d1humi
                   
                   print('MAC:' , mac)
@@ -102,9 +102,9 @@ class IoT4_0(threading.Thread):
     
                            try:
                                     
-                                    print("[pi] d1temp: ",d1temp," d1humi: ",d1humi, " d1dust: ",d1dust)
+                                    print("[pi] d1temp: ",d1temp," d1humi: ",d1humi, " d1dist: ",d1dist)
 
-                                    data = json.dumps({"capabilityAlternateId":"newCapa", "measures":[[d1temp,d1humi,d1dust]],"sensorAlternateId": sensorId})
+                                    data = json.dumps({"capabilityAlternateId":"newCapa", "measures":[[d1temp,d1humi,d1dist]],"sensorAlternateId": sensorId})
                                     headers = {'content-type': 'application/json'}
                                     r = requests.post(postAddress,data=data, headers = headers,cert='keyStore.pem', timeout=5)
                                     responseCode = r.status_code
