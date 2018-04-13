@@ -1,0 +1,1 @@
+{"sensorTypeAlternatedId":3363, "capabilityAlternatedId":"edge_capa", "sensorAlternatedId":"edg_sensor","measures":[[254]]}
